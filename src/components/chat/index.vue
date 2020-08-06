@@ -12,7 +12,10 @@
           <span class="unreadNum">{{getUnreadNum(item)}}</span>
         </div>
         <span class="time-style" style="float:right">{{getLastMsg(item).msgTime}}</span>
-        <div>{{getLastMsg(item).lastMsg}}</div>
+        <div>
+          <span>{{getLastMsg(item).lastMsg}}</span>
+          <span style="float:right">{{`${item.affiliations_count}人正在观看`}}</span>
+        </div>
       </a-menu-item>
     </a-menu>
   </div>
@@ -59,23 +62,12 @@ export default {
       },
       isCollapse: true,
       unRead: ""
-      // selectedKeys: [ this.getKey(this.activedKey[this.type]) ]
     };
   },
 
   beforeMount() {
-    // if (this.type === "contact") {
-    //   setTimeout(() => {
-    //     this.onGetFirendBlack();
-    //     this.onGetContactUserList();
-    //   }, 100);
-    // } else if (this.type === "group") {
-    //   this.onGetGroupUserList();
-    // } else if (this.type === "chatroom") {
-    //   this.onGetChatroomUserList();
-    // }
     setTimeout(()=>{
-      this.onGetGroupUserList()
+      this.onGetChatroomUserList()
     },100)
   },
   mounted() {
@@ -88,19 +80,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      contact: "onGetContactUserList",
-      group: "onGetGroupUserList",
       chatroom: "onGetChatroomUserList",
       msgList: "onGetCurrentChatObjMsg"
     }),
     userList() {
       return {
-        contact: this.contact.filter(item => {
-          if (item && !this.blackList.includes(item.name)) {
-            return item;
-          }
-        }),
-        group: this.group,
         chatroom: this.chatroom
       };
     },
@@ -182,6 +166,7 @@ export default {
       return unReadNum;
     },
     select2(key, index) {
+      console.log('key>>',key,'index>>',index)
       this.$data.selectedKeys = [index];
       this.select(key);
       this.$data.activedKey[this.type] = key;
@@ -265,41 +250,6 @@ export default {
       return rnTxt.toString().replace(/,/g, "");
     },
 
-    callVideo() {
-      if (this.type == "contact") {
-        this.$refs.emediaModal.showEmediaModal();
-        this.$refs.emediaModal.showCallerWait(
-          this.$data.activedKey[this.type].name
-        );
-        const videoSetting = JSON.parse(localStorage.getItem("videoSetting"));
-        const recMerge = (videoSetting && videoSetting.recMerge) || false;
-        const rec = (videoSetting && videoSetting.rec) || false;
-        this.onCallVideo({
-          chatType: this.type,
-          to: this.$data.activedKey[this.type].name,
-          rec,
-          recMerge
-        });
-      } else if (this.type == "group") {
-        this.getGroupMembers(this.$data.activedKey[this.type].groupid);
-        this.$refs.addAvMembertModal.show();
-      }
-    },
-    callVoice() {
-      this.$refs.emediaModal.showEmediaModal();
-      this.$refs.emediaModal.showCallerWait(
-        this.$data.activedKey[this.type].name
-      );
-      const videoSetting = JSON.parse(localStorage.getItem("videoSetting"));
-      const recMerge = (videoSetting && videoSetting.recMerge) || false;
-      const rec = (videoSetting && videoSetting.rec) || false;
-      this.onCallVoice({
-        chatType: this.type,
-        to: this.$data.activedKey[this.type].name,
-        rec,
-        recMerge
-      });
-    },
     readablizeBytes(value) {
       let s = ["Bytes", "KB", "MB", "GB", "TB", "PB"];
       let e = Math.floor(Math.log(value) / Math.log(1024));

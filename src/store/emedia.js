@@ -38,7 +38,6 @@ const Emedia = {
 				pageSize: pageSize,
 				groupId: payload,
 				success: function(resp){
-					console.log("Response: ", resp);
 					context.commit({
 						type: mutationsTypes.GET_GROUPMEMBERS,
 						groupMembers: resp.data

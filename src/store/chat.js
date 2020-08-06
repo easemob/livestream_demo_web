@@ -37,21 +37,9 @@ const Chat = {
 	mutations: {
 		updateUserList(state, payload) {
 			const { userList, type } = payload;
-			// 如果是添加黑名单，则从当前用户列表中删掉此人
-			// if(payload.black && payload.black.type === "addBlack"){
-			// 	const addName = payload.black.addName;
-			// 	const userList = state.userList[type];
-			// 	let newUserList = _.pullAllBy(userList, [{ name: addName }], "name");
-			// 	state.userList[type] = newUserList;
-			// }
-			// else{
-			// 	state.userList[type] = userList;
-			// }
 			state.userList[type] = userList;
 		},
 		updateMsgList(state, payload) {
-			console.log('payload>>', payload);
-
 			const { chatType, chatId, msg, bySelf, type, id } = payload;
 			const { params } = Vue.$route;
 			let status = "unread";
@@ -166,7 +154,6 @@ const Chat = {
 			try {
 				WebIM.conn.getRoster({
 					success: function (roster) {
-						// console.log("roster", roster);
 						const userList = roster.filter(user => ["both", "to"].includes(user.subscription));
 						context.commit("updateUserList", {
 							userList,
@@ -198,18 +185,6 @@ const Chat = {
 		},
 		onGetChatroomUserList: function (context, payload) {
 			var option = {
-				// apiUrl: "https://a1.easemob.com",
-				// pagenum: 1,                                 // 页数
-				// pagesize: 20,                               // 每页个数
-				// success: function(list){
-				// 	context.commit("updateUserList", {
-				// 		userList: list.data,
-				// 		type: "chatroomUserList"
-				// 	});
-				// },
-				// error: function(){
-				// 	console.log("List chat room error");
-				// },
 				callback:function(list){
 					context.commit("updateUserList", {
 						userList: list.entities,
@@ -223,8 +198,6 @@ const Chat = {
 		},
 		// 获取当前聊天对象的记录 @payload： {key, type}
 		onGetCurrentChatObjMsg: function (context, payload) {
-			console.log('context>>', context);
-
 			const { id, type } = payload;
 			context.commit("updateCurrentMsgList", context.state.msgList[type][id]);
 		},
@@ -366,11 +339,6 @@ const Chat = {
 				group: "groupid",
 				chatroom: "id"
 			};
-
-			// console.log('bold>>>', bold);
-			// console.log('newBold>>', WebIM.utils.parseDownloadResponse.call(WebIM.conn, bold));
-			// let newBold = WebIM.utils.parseDownloadResponse.call(WebIM.conn, bold)
-			// var file = WebIM.utils.getFileUrl(input);
 			msgObj.set({
 				apiUrl: WebIM.config.apiURL,
 				file: file,

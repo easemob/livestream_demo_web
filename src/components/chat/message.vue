@@ -31,8 +31,6 @@
             :disabled="!item.bySelf"
           >
             <span style="user-select: none">
-              <!-- <el-dropdown v-else @command="handleCommand(item)" trigger="click" :style="{'float':item.bySelf ? 'right':'left'}">
-              <span class="el-dropdown-link">-->
               <!-- 图片消息 -->
               <img
                 :key="item.msg"
@@ -75,12 +73,7 @@
                 :class="{ 'byself': item.bySelf}"
               />
 
-              <!-- <div v-if="item.bySelf?true:false" class="status">{{status[item.status]}}</div> -->
             </span>
-            <!-- <el-dropdown-menu slot="dropdown" >
-            <el-dropdown-item command="a" :disabled="!item.bySelf">撤回</el-dropdown-item>
-          </el-dropdown-menu>
-            </el-dropdown>-->
 
             <a-menu slot="overlay">
               <a-menu-item key="1" @click="handleCommand(item)">撤回</a-menu-item>
@@ -103,20 +96,6 @@
           <UpLoadImage :type="this.type" :chatId="activedKey[type]" />
           <!-- 上传文件组件 -->
           <UpLoadFile :type="this.type" :chatId="activedKey[type]" />
-
-          <!-- <i
-          class="el-icon-video-camera icon"
-          @click="callVideo"
-          v-show="isHttps&&type != 'chatroom'"
-          :style="nowIsVideo?'pointer-events: none':'cursor: pointer'"
-          ></i>-->
-          <!-- <i
-          v-if="type === 'contact'"
-          class="el-icon-microphone icon"
-          @click="callVoice"
-          v-show="isHttps && type != 'chatroom'"
-          :style="nowIsVideo?'pointer-events: none':'cursor: pointer'"
-          ></i>-->
         </div>
         <div class="fotter-send">
           <a-input
@@ -452,8 +431,6 @@ export default {
       v ? (this.$data.nowIsVideo = true) : (this.$data.nowIsVideo = false);
     },
     onPlayerInit(val) {
-      console.log("val>>", val);
-
       this.player = val;
     }
   },

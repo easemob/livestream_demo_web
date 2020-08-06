@@ -20,7 +20,6 @@ export const getLiveRooms = (option) => {
         });
     liveRooms
         .then(res => {
-            console.log("res>>>", res);
             option.callback && option.callback(res)
         })
     ["catch"](err => {

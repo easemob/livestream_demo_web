@@ -23,15 +23,10 @@
       <a-menu
         v-model="current"
         mode="horizontal"
-        :defaultSelectedKeys="['group']"
+        :defaultSelectedKeys="['chatroom']"
         :style="{ lineHeight: '50px', background: '#434648', color: '#fff', textAlign: 'left'}"
         @click="contactTypeChange"
       >
-        <a-menu-item key="group">
-          <a-icon type="team" class="navMenu-icon" />
-          <span class="navMenu-text">群组</span>
-          <div class="tip-style" v-if="getUnread('group').group">&nbsp;</div>
-        </a-menu-item>
         <a-menu-item key="chatroom">
           <a-icon type="usergroup-add" class="navMenu-icon" />
           <span class="navMenu-text">直播聊天室</span>
@@ -77,7 +72,7 @@ export default {
       groupRead: false,
       contactRead: false,
       showSettingOptions: false,
-      activeKey: "group",
+      activeKey: "chatroom",
       selectedItem: "",
       showAddOptions: false,
       userName:
@@ -85,7 +80,7 @@ export default {
         JSON.parse(localStorage.getItem("userInfo")).userId,
       collapsed: false,
       broken: false,
-      current: ["group"]
+      current: ["chatroom"]
     };
   },
   computed: {
@@ -148,32 +143,6 @@ export default {
     addModalChange() {
       this.$data.showAddOptions = !this.$data.showAddOptions;
     },
-    getUnread(type) {
-      const chatList = this.chatList[type];
-      let obj = {
-        contact: false,
-        group: false
-      };
-      if (JSON.stringify(chatList) != "{}") {
-        for (const item in chatList) {
-          chatList[item].map((v, k) => {
-            if (v.status === "unread") {
-              if (v.chatType === "group") {
-                obj.group = true;
-              }
-              if (v.chatType === "contact") {
-                obj.contact = true;
-              }
-            }
-            return obj;
-          });
-        }
-      }
-      return {
-        contact: obj.contact,
-        group: obj.group
-      };
-    }
   },
   components: {
     MessageBox,

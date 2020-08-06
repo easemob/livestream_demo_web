@@ -48,8 +48,6 @@ WebIM.conn.listen({
 		Vue.$router.push({ path: "/login" });
 	}, // 连接关闭回调
 	onTextMessage: function (message) {
-		console.log('message>>',message);
-		
 		const { from, to, type } = message;
 		const chatId = type !== "chat" ? to : from;
 		const typeMap = {
@@ -290,11 +288,11 @@ WebIM.conn.listen({
 			console.log('请输入账号密码')
 		} else if (message.type == 28) {
 			console.log("未登陆")
-		} else if (JSON.parse(message.data.data).error_description == "user not found") {
+		} else if ( message.data && JSON.parse(message.data.data).error_description == "user not found") {
 			Message.error("用户名不存在！")
-		} else if (JSON.parse(message.data.data).error_description == "invalid password") {
+		} else if (message.data && JSON.parse(message.data.data).error_description == "invalid password") {
 			console.log('密码无效！')
-		} else if (JSON.parse(message.data.data).error_description == "user not activated") {
+		} else if (message.data && JSON.parse(message.data.data).error_description == "user not activated") {
 			Message.error("用户已被封禁！")
 		} else if (message.type == "504") {
 			Message("消息撤回失败");
