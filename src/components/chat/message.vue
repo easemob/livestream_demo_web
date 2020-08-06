@@ -1,7 +1,7 @@
 <template>
   <div class="messagebox" v-show="activedKey[type]!= ''">
     
-      <video-player :config="playerConfig" @playerInit="onPlayerInit"></video-player>
+      <video-player :config="playerConfig" @playerInit="onPlayerInit" ref="videoPlayer"></video-player>
       <!-- <div class="messagebox-cake"> -->
       <div class="messagebox-header">
         <div>
@@ -141,9 +141,7 @@ export default {
         read: "已读"
       },
       nowIsVideo: false,
-      playerConfig: {
-        url: `http://pili-live-hls.easemob.com/es-liveroom/119267823517697.m3u8`
-      },
+      playerConfig: {},
       rootStyle: {
         backgroundColor: "rgba(0,0,0,0.88)",
         width: 500
@@ -226,12 +224,9 @@ export default {
       this.$data.activedKey[this.type] = key;
       const me = this;
       me.$data.loadText = "加载更多";
-      // if( me.roomId){
-      //     WebIM.conn.quitChatRoom({
-      //         roomId: me.roomId // 聊天室id
-      //     });
-      //     me.roomId = ''
-      //   }
+      
+      // 点击列表初始化播放器
+      this.initPlayer(key)
 
       if (this.type === "group") {
         this.$router.push({ name: this.type, params: { id: key.groupid } });
@@ -283,7 +278,11 @@ export default {
         });
       }
     },
-
+    initPlayer(key){
+      this.$refs.videoPlayer.destroy()
+      this.playerConfig.url = `http://pili-live-hls.easemob.com/es-liveroom/${key.id}.m3u8`
+      this.$refs.videoPlayer.initPlayer()
+    },
     loadMoreMsgs() {
       const me = this;
       const success = function(msgs) {

@@ -166,7 +166,6 @@ export default {
       return unReadNum;
     },
     select2(key, index) {
-      console.log('key>>',key,'index>>',index)
       this.$data.selectedKeys = [index];
       this.select(key);
       this.$data.activedKey[this.type] = key;
