@@ -32,7 +32,8 @@ const Chat = {
 			group: {},
 			chatroom: {},
 		},
-		currentMsgs: []
+		currentMsgs: [],
+		liveCdnUrl: "",
 	},
 	mutations: {
 		updateUserList(state, payload) {
@@ -147,6 +148,10 @@ const Chat = {
 				ary.push({ name: key });
 			});
 			state.userList.contactUserList = _.pullAllBy(state.userList.contactUserList, ary, "name");
+		},
+		updateLiveCdnUrl(state, payload){
+			const { liveCdnUrl } = payload
+			state.liveCdnUrl = liveCdnUrl;
 		}
 	},
 	actions: {
@@ -540,6 +545,38 @@ const Chat = {
 				},
 			};
 			WebIM.conn.recallMessage(option);
+		},
+		getLiveCdnUrl: function (context, payload) {
+			let {roomId} = payload
+			const apiURL = `http://a1.easemob.com/appserver/agora/cdn/streams/url/play?protocol=hls&domain=ws-rtmp-pull.easemob.com&pushPoint=live&streamKey=${roomId
+				}`;
+			let liveRoomsUrl = fetch(apiURL, {
+				method: 'GET',
+				headers: new Headers(
+					{
+						'content-type': 'application/json',
+						'Authorization': 'Bearer ' + localStorage.getItem('token')
+					},
+				),
+			})
+				.then(response => {
+					return response.json().then(json => ({ json, response }));
+				})
+				.then(({ json, response }) => {
+					if (!response.ok) {
+						return Promise.reject(json);
+					}
+					return json;
+				});
+			liveRoomsUrl
+				.then(res => {
+					context.commit("updateLiveCdnUrl", {
+						liveCdnUrl: res.data
+					});
+				})
+			["catch"](err => {
+				console.log('err>>>', err);
+			});
 		}
 	},
 	getters: {
