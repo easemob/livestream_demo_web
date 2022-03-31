@@ -280,7 +280,7 @@ export default {
     },
     initPlayer(key){
       this.$refs.videoPlayer.destroy()
-      this.playerConfig.url = `http://pili-live-hls.easemob.com/es-liveroom/${key.id}.m3u8`
+      this.playerConfig.url = this.$store.state.chat.liveCdnUrl
       this.$refs.videoPlayer.initPlayer()
     },
     loadMoreMsgs() {

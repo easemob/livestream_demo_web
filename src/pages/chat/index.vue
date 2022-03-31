@@ -89,7 +89,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["onLogout"]),
+    ...mapActions(["onLogout","getLiveCdnUrl"]),
     toLogout() {
       this.onLogout();
     },
@@ -110,6 +110,10 @@ export default {
       this.$data.collapsed = false;
     },
     select(i) {
+      let payload = {
+        roomId: i.id
+      };
+      this.getLiveCdnUrl(payload)
       this.$refs.messageList.select(i);
       if (this.broken) {
         this.$data.collapsed = true;
