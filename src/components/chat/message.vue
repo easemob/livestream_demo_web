@@ -146,7 +146,8 @@ export default {
         backgroundColor: "rgba(0,0,0,0.88)",
         width: 500
       },
-      player: null
+      player: null,
+      liveCdnUrl:""
     };
   },
 
@@ -154,6 +155,14 @@ export default {
   updated() {
     // console.log("数据", this.$store);
     this.scollBottom();
+  },
+  watch: {
+    '$store.state.chat.liveCdnUrl': {
+      handler (val) {
+        this.liveCdnUrl = val
+        this.initPlayer()
+      }
+    }
   },
   computed: {
     ...mapGetters({
@@ -224,8 +233,6 @@ export default {
       this.$data.activedKey[this.type] = key;
       const me = this;
       me.$data.loadText = "加载更多";
-      
-      // 点击列表初始化播放器
       this.initPlayer(key)
 
       if (this.type === "group") {
@@ -280,7 +287,7 @@ export default {
     },
     initPlayer(key){
       this.$refs.videoPlayer.destroy()
-      this.playerConfig.url = this.$store.state.chat.liveCdnUrl
+      this.playerConfig.url = this.liveCdnUrl
       this.$refs.videoPlayer.initPlayer()
     },
     loadMoreMsgs() {
