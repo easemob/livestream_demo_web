@@ -1,62 +1,163 @@
->Easemob WebIM Live
+# Introduction
 
-# webim Live demo简介
-webim-Live demo是基于环信webIM demo 进行二次开发的demo，具有拉流功能。
+This demo demonstrates the live chat room implemented by Agora Chat SDK and Agora Chat appServer.
 
-# 运行起来
-``` bash
-# install dependencies
-npm install
+## How to use this demo
 
-# build for production with minification
-npm run build
+- First, Clone the code locally, and then NPM install or YARN install the dependencies.
+- When you enter the app for the first time, a UUID guest account will be automatically registered, the default password is 123456, the registration is successful and the automatic login is completed, and the automatic login is completed and jumps to the main page.
+- To Refresh, click Refresh to Fetch the newly created live chat rooms.
+- After successful login, the Channel List will be automatically loaded. Visitors can click any broadcasting room in the broadcasting hall to enter the broadcasting room to watch the broadcasting. Chat messages can be sent to the anchors in the broadcasting room, and the audience in the current chat room can receive the message animation.
 
-# build for production and view the bundle analyzer report
-npm run build --report
+## Function implementation
+
+### Join the chat room
+
+1. Fetch the livestream rooms
+
+```javascript
+/**
+ *  Fetch the livestream rooms.
+ */
+curl -X GET http://localhost:8080/appserver/liverooms?limit=2&cursor=107776865009666 -H 'Authorization: Bearer $token ' -H 'Content-Type: application/json'
 ```
-# 项目结构
 
-| 目录  | 说明|   |
-|------|-----|------|
-| build  | 打包后的文件 |
-| config | 项目的配置 |
-| node_modules | 项目依赖
-| static | 资源文件 |
-| travis | CI脚本 |
-| src | 项目源文件|
-|     | components| 项目组件
-|     | config | 表情和项目中ui配置
-|     | pages | 项目页面
-|     | router | 路由
-|     | store | vuex store
-|     | utils | sdk 引入和配置
+2. Join the chat room.
 
-# 主要功能点说明
-## 拉流组件
-代码目录：src/components/videoPlayer
-## sdk集成
-代码目录：src/utils/WebIM.js
+```javascript
+/**
+ *  Join the chat room
+ *
+ *  @param options
+ *  @param roomId The chat room ID
+ */
 
-+ 引入sdk和配置文件，实例化。
-+ 注册监听事件
+let options = {
+  roomId: "roomId",
+};
+conn.joinChatRoom(options).then((res) => {
+  console.log(res);
+});
+```
 
-## 发送消息
-代码目录：src/components/chat/index.vue
-+ 在chat组件里实现发消息以及消息上屏,index为发送消息，message为显示消息上屏
-+ 具体发送消息的方法在 src/store/chat
+3. Listen for messages.
 
-## 消息存储
-+ 消息存储在 store > chat > msgList
-+ 关于持久化：这个demo采用的sdk消息漫游的增值服务，可以拉取历史消息，当然你也可以采用indexdb来做本地存储，同时也可以开通实时回调服务，将消息同步到自己的服务器。
+```javascript
+conn.addEventHandler("CHATROOM", {
+	onCustomMessage: (msg) => {   			// A custom message was received.
+		console.log('onCustomMessage',msg);
+	},
+	onTextMessage: (msg) => {   			// A text message was received.
+		console.log('onTextMessage',msg);
+	},
+	onChatroomChange: (event) => {
+		console.log('onChatroomChange',event); // The chat room notification event was received.
+	}
+)
+```
 
-# 关于拉流具体集成
-demo使用的是字节跳动开源项目 西瓜播放器进行的拉流解析详细文档 http://h5player.bytedance.com/api/
+4. Send a text message.
 
-# 拉流格式
-hls格式，url后缀：m3u8
+```javascript
+function sendPrivateText() {
+  let option = {
+    chatType: "chatRoom", // Session type, set to chat room.
+    type: "txt", // Message type.
+    to: "roomId", // Message receiver (user ID).
+    msg: "message content", // Message content.
+  };
+  let msg = WebIM.message.create(option);
+  connection
+    .send(msg)
+    .then(() => {
+      console.log("send private text Success");
+    })
+    .catch((e) => {
+      console.log("Send private text error");
+    });
+}
+```
 
-### 如何观看正在推流
-请在官网下载 环信直播app Demo，找到对应的房间号即可进行拉流观看
+5. Get the live chat room details from the appServer and get the membership list.
 
-# 写在最后
-第一期demo还有很多需要完善的地方，有许多不足。后续会逐步完善用户体验
+```
+/**
+ * Get the live chat room details
+ */
+curl -X GET http://localhost:8080/appserver/liverooms/107776865009665 -H 'Authorization: Bearer $token' -H 'Content-Type: application/json'
+```
+
+6. Get a mute list of live chat room.
+
+```javascript
+/**
+ * Gets all muted members in the chat room.
+ */
+
+conn.getChatRoomMutelist({ chatRoomId: "chatRoomId" });
+```
+
+7. Unmutes a live chat room audience.
+
+```javascript
+/**
+ * Unmutes the chat room member. Only the chat room owner can call this method.
+ */
+
+conn.unmuteChatRoomMember({ chatRoomId: "chatRoomId", username: "user1" });
+```
+
+8. get the allow list of the live chat room.
+
+```javascript
+/**
+ * Gets the allow list of the chat room.
+ *
+ * Only the chat room owner or admin can call this method.
+ */
+conn.getChatRoomWhitelist({ chatRoomId: "chatRoomId" });
+```
+
+9. Remove the audience from the allow list.
+
+```javascript
+/**
+ * Removes members from the allow list of the chat room. Only the chat room owner or admin can call this method.
+ */
+conn.removeChatRoomAllowlistMember({
+  chatRoomId: "chatRoomId",
+  userName: "user1",
+});
+```
+
+### Chat room message list
+
+The chat room message list and input box are functions in UIKit. For details, please refer to the chat room section of chat-uikit
+
+## New feature: custom message body
+
+The "gift" function implemented by this demo uses "custom message body" to construct transmission messages
+
+```javascript
+function sendCustomMsg() {
+  let option = {
+    chatType: "chatRoom",
+    type: "custom",
+    to: "userID",
+    customEvent: "chatroom_gift", // Custom Events
+    customExts: {
+      gift_id: "gift_id",
+      gift_num: "gift_num",
+    },
+  };
+  let msg = WebIM.message.create(option);
+  connection
+    .send(msg)
+    .then(() => {
+      console.log("success");
+    })
+    .catch((e) => {
+      console.log("fail");
+    });
+}
+```
