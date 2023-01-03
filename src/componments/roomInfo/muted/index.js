@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => {
         //     height: "24px"
         // },
         listBox: {
-            overflowY: "scroll",
+            overflowY: "auto",
             overflowX: "hidden",
             height: "100%",
             cursor: "pointer"

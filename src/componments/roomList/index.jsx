@@ -16,9 +16,9 @@ import ellipseIcon from '../../assets/images/ellipse.png'
 const useStyles = makeStyles((theme) => {
     return {
         root: {
+            height: "60%",
             overflow: "hidden",
-            // background: "#292929",
-            padding: " 0 36px 37px",
+            padding: " 0 36px 24px",
             position: "relative"
         },
         titleBox: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => {
         roomBox: {
             display: "flex",
             // width: "100%",
-            overflowX: "scroll",
+            overflowX: "auto",
             marginTop: "10px",
         },
         itemStyle: {
@@ -79,8 +79,8 @@ const useStyles = makeStyles((theme) => {
             marginLeft: "4px"
         },
         liveImgStyle: {
-            width: "180px",
-            height: "180px",
+            width: "160px",
+            height: "160px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) => {
         },
         lrsInfoBox: {
             position: "absolute",
-            bottom: "10px",
+            bottom: "20px",
             left: "10px"
         },
         nameStyle: {

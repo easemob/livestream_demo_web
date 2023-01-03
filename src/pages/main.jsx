@@ -22,13 +22,14 @@ const useStyles = makeStyles((theme) => {
 		root: {
 			backgroundColor: "#292929",
 			overflow: "hidden",
-			height: (props) => (props.isAdapter ? "100vh" : "100%"),
+			height: "100vh",
+			width: "100%"
 		},
 		bodyBox:{
 			display: "flex", 
-			justifyContent: "space-between", 
-			padding: "24px 36px 28px" ,
-			height: (props) => (props.isAdapter ? "calc(100% - 466px)" : "720px")
+			padding: "12px 24px",
+			height: "52%",
+			width: "100%"
 		},
 		iconBox: {
 			height: "44px",
@@ -41,22 +42,24 @@ const useStyles = makeStyles((theme) => {
 			borderRadius:"12px"
 		},
 		chatBox:{
+			height: "68%",
 			display: "flex", 
 			width: "100%", 
-			height: "calc(100% - 162px)",
-			// height:"396px",
-			marginBottom: "4px"
+			marginBottom: "4px",
+			overflow: "hidden",
+			display: "flex"
 		},
 		uikitBox:{
-			width: "100%",
 			borderRadius: "0 12px 12px 0",
 			border: "1px solid #3D3D3D",
-			overflow: "hidden"
+			overflow: "hidden",
+			height: "100%",
+			width: "80%"
 		},
 		footerBox:{
 			position: (props) =>  (props.isAdapter ? "absolute" : "none" ),
-			bottom: "0px",
-			width: "100%"
+			width: "100%",
+			height: "40%"
 		}
 	}
 });
@@ -82,7 +85,7 @@ const Main = () => {
 		<Box className={classes.root} ref={bodyRef}>
 			<Header />
 			<Box className={classes.bodyBox}>
-				<Box style={{ width: "100%", marginRight: "10px" }}>
+			<Box style={{ width: isMini ? "92%" : "75%", height:"100%", marginRight: "10px" }}>
 					<Box className={classes.chatBox}>
 						<VideoPlayer />
 						<Box className={classes.uikitBox}>

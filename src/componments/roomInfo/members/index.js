@@ -9,8 +9,10 @@ const useStyles = makeStyles((theme) => {
     return {
         root: {
             overflow: "hidden",
-            width: (props) => (props.isAdmin ? "292px" : "340px"),
-            height: "calc(100% - 60px)"
+            height: "calc(100% - 50px)",
+            width: "100%"
+            // width: (props) => (props.isAdmin ? "292px" : "340px"),
+            // height: "calc(100% - 60px)"
         },
         listBox: {
             overflowY: "scroll",
@@ -31,11 +33,11 @@ const Members = ({ roomMembers, searchValue }) => {
 
     return (
         <Box className={classes.root}>
-            <List className={classes.listBox}>
-                {roomMembersObj.length > 0 ? roomMembersObj.map((item, i) => {
+            {roomMembersObj.length > 0 ? <List className={classes.listBox}>
+                {roomMembersObj.map((item, i) => {
                     return <MemberItem member={item} roomMembers={roomMembers} key={i} />
-                }) : <NoSearch value={searchValue} />}
-            </List>
+                }) }
+            </List> : <NoSearch value={searchValue} />}
         </Box>
     )
 }
