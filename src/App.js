@@ -16,7 +16,7 @@ import './App.css'
 const App = () => {
 	useEffect(() => {
 		initListen()
-		let authData = JSON.parse(sessionStorage.getItem('webim_auth'))
+		let authData = JSON.parse(sessionStorage.getItem('webim_auth')) || {}
 		if (authData.user && authData.accessToken) {
 			loginByToken(authData.user, authData.accessToken)
 		}
