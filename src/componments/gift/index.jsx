@@ -9,10 +9,10 @@ const useStyles = makeStyles((theme) => {
 	return {
 		root: {
 			width: "100%",
+			height: "30%",
+			marginTop: "8px",
 			borderRadius: "16px",
 			border: "1px solid #3D3D3D",
-			// marginTop: "3px",
-			padding: "7px 0"
 		},
 		textStyle: {
 			height: "19px",
@@ -23,28 +23,28 @@ const useStyles = makeStyles((theme) => {
 			letterSpacing: "0px",
 			textAlign: "left",
 			color: "#FFFFFF",
-			padding: "4px 20px 12px"
+			padding: "4px 20px 6px"
 		},
 		giftBox: {
 			display: "flex",
 			alignItems: "center",
 			overflowY: "hidden",
-			overflowX: "scroll"
+			overflowX: "auto"
 		},
 		giftStyle: {
 			marginLeft: "10px",
 			background: "#333333",
-			width: "68px",
-			height: "72px",
-			padding: "8px 12px 28px",
+			width: "62px",
+			height: "66px",
+			padding: "8px 12px 8px",
 			borderRadius: "12px",
 			textAlign: "center",
 			cursor: "pointer",
 			position: "relative"
 		},
 		giftImg: {
-			width: "56px",
-			height: "56px"
+			width: "40px",
+			height: "40px"
 		},
 		priceBox: {
 			display: "flex",

@@ -9,7 +9,7 @@ import gongan from '../../assets/images/gongan.png'
 const useStyles = makeStyles((theme) => {
     return {
         root: {
-            height: "156px",
+            height: "25%",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-around",
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => {
             fontFamily: "Roboto",
             fontSize: "14px",
             fontWeight: "400",
-            lineHeight: "28px",
+            lineHeight: "14px",
             letterSpacing: "0px",
             textAlign: "left",
             color: "#FFFFFF"
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => {
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-end",
-            marginTop: "40px"
+            marginTop: "28px"
         },
         versionStyle: {
             fontFamily: "Roboto",
@@ -75,10 +75,10 @@ const Footer = () => {
     return (
         <Box className={classes.root}>
             <div className={classes.huanxin}>
-                <a href='https://www.easemob.com/'>
+                <a href='https://www.easemob.com/' style={{margin: "8px 8px 0"}}>
                     <img src={huanxinIcon} alt='easemob'></img>
                 </a>
-                <div className={classes.copyrightBox}>
+                <div>
                     <Typography className={classes.copyrightStyle}>Copyright © 2015-2022 环信 Co.,Ltd. 北京亿思摩博科技有限公司版权所有
                     </Typography>
                     <Typography>

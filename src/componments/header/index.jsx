@@ -12,7 +12,7 @@ import defaultAvatarImg from '../../assets/images/defaultAvatar.png'
 const useStyles = makeStyles((theme) => {
     return {
         root: {
-            height: "64px",
+            height: "8%",
             // width: "100%",
             display: "flex",
             alignItems: "center",
@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => {
             alignItems: "center",
         },
         avatarStayle: {
-            width: '48px',
-            height: "48px",
+            width: '40px',
+            height: "40px",
             background: "red",
             borderRadius: "50%",
             display: "flex",
@@ -39,8 +39,8 @@ const useStyles = makeStyles((theme) => {
             justifyContent: "center"
         },
         avatarStyle: {
-            width: "48px",
-            height: "48px"
+            width: "40px",
+            height: "40px"
         },
         titleStyle: {
             height: "32px",

@@ -22,8 +22,8 @@ import closeIcon from '../../assets/images/close.png'
 const useStyles = makeStyles((theme) => {
     return ({
         root: {
-            width: "340px",
-            // height: "560px",
+            height:"100%",
+            width: "20%",
             borderRadius: "16px",
             border: "1px solid #3D3D3D",
         },
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            height: "60px",
+            height: "50px",
             background: "#3D3D3D",
             padding: "0 10px",
             borderRadius: "12px 12px 0 0"
@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => {
         },
         inputStyle: {
             borderRadius: "16px",
-            width: "100%",
+            width: "85%",
             // border: "1px solid #FFFFFF",
             padding: "0 15px 0 30px",
             marginRight: "4px",

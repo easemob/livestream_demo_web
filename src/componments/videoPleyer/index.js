@@ -8,16 +8,20 @@ import store from '../../redux/store'
 import { clearGiftMsgAction } from '../../redux/actions'
 
 import defaultAvatar from '../../assets/images/defaultAvatar.png'
+import defaultVideo from '../../assets/images/defaultVideo.png'
+
 const useStyles = makeStyles((theme) => {
     return {
         root: {
             position: "relative",
             border: "1px solid #3D3D3D",
-            borderRadius: "12px 0 0 12px"
+            borderRadius: "12px 0 0 12px",
+            height: "100%",
+            width: "20%"
         },
         videoBox: {
-            width: "340px !important",
-            // height: "398px !important",
+            width: "100% !important",
+            height: "100% !important",
             borderRadius: "12px 0 0 12px"
         },
         giftBox: {
@@ -25,7 +29,7 @@ const useStyles = makeStyles((theme) => {
             position: "absolute",
             bottom: "40px",
             left: "10px",
-            overflowY: "scroll",
+            overflowY: "auto",
             width: "calc(100% - 3x0px)",
         },
         giftMsgStyle: {
@@ -109,7 +113,7 @@ const VideoPlayer = () => {
     }
     return (
         <Box className={classes.root} >
-                <ReactPlayer
+                {liveCdnUrl ? <ReactPlayer
                     url={liveCdnUrl}
                     className={classes.videoBox}
                     playing={true}
@@ -122,7 +126,7 @@ const VideoPlayer = () => {
                         }
                     }}
                     pip={true}
-                />
+                /> : <img src={defaultVideo} width='100%' height='100%'/>}
             <Box className={classes.giftBox}>
                 {isGiftMsg && giftMsgs.map((item,i) => {
                     let { id, customExts, from } = item;
