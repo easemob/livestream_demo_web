@@ -48,6 +48,12 @@
         "Star": "Star",
         "Lollipop": "Lollipop",
         "Diamond": "Diamond",
-        "Crown": "Crown"
+        "Crown": "Crown",
+        "Birthday": "Birthday",
+        "Gender": "Gender",
+        "Male": "Male",
+        "Female": "Female",
+        "Other": "Other",
+        "Secret": "Secret"
     }
 }

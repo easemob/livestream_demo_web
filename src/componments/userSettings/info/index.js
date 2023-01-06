@@ -98,7 +98,7 @@ const InfoSetting = () => {
     const [userAcatar, setUserAcatar] = useState(userInfo?.avatarurl || "");
     const [nameValue, setNameValue] = useState(userInfo?.nickname || "");
     const [nameEditStatus, setNameEditStatus] = useState(true);
-    const [genderValue, setGenderValue] = useState(userInfo?.gender || "Male");
+    const [genderValue, setGenderValue] = useState(userInfo?.gender || i18next.t("Male"));
     const [value, setValue] = useState(userInfo.brith || '2008-01-01');
     const inputRef = createRef();
 
@@ -122,7 +122,7 @@ const InfoSetting = () => {
     }
 
     const handleGenderChange = (e) => {
-        setGenderValue(e.target.value);
+        setGenderValue(i18next.t(e.target.value));
         console.log('handleGenderChange>>>', e.target.value);
         updateUserInfo(userAcatar, nameValue, e.target.value)
     }

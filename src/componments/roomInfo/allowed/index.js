@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, List, ListItem, ListItemText, Avatar, Button, Typography } from "@material-ui/core";
 import acaratImg from '../../../assets/images/defaultAvatar.png'
-import streamerIcon from '../../../assets/images/streamer.png'
-import moderatorIcon from '../../../assets/images/moderator.png'
+import streamerIcon from '../../../assets/images/streamer_web@2x.png'
+import moderatorIcon from '../../../assets/images/moderator_web@2x.png'
 import blockedIcon from '../../../assets/images/blocked@2x.png'
 
 
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => {
             marginTop: "4px"
         },
         iconRoleStyle: {
-            width: "61px",
+            // width: "61px",
             height: "16px"
         },
     }

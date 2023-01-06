@@ -48,6 +48,12 @@
         "Star": "星星",
         "Lollipop": "棒棒糖",
         "Diamond": "钻石",
-        "Crown": "皇冠"
+        "Crown": "皇冠",
+        "Birthday": "生日",
+        "Gender": "性别",
+        "Male": "男",
+        "Female": "女",
+        "Other": "其他",
+        "Secret": "保密"
     }
 }

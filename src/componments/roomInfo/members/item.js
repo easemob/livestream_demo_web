@@ -8,8 +8,8 @@ import { addRoomWhiteUser, addRoomMuted, addRoomBlock } from '../../../api/room'
 import i18next from "i18next";
 import acaratImg from '../../../assets/images/defaultAvatar.png'
 import ellipsisIcon from '../../../assets/images/ellipsis.png'
-import streamerIcon from '../../../assets/images/streamer.png'
-import moderatorIcon from '../../../assets/images/moderator.png'
+import streamerIcon from '../../../assets/images/streamer_web@2x.png'
+import moderatorIcon from '../../../assets/images/moderator_web@2x.png'
 import mutedIcon from '../../../assets/images/mute.png'
 import allowIcon from '../../../assets/images/allowed@2x.png'
 import timeoutIcon from '../../../assets/images/timeout.png'
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => {
             marginTop: "4px"
         },
         iconRoleStyle: {
-            width: "61px",
+            // width: "61px",
             height: "16px"
         },
         root: {
