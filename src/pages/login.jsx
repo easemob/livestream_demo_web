@@ -56,24 +56,24 @@ const Login = () => {
 
     const getCode = () => {
         if(!values.phoneNumber){
-            return message.error('请输入正确的手机号')
+            return message.error(i18next.t("Please enter the correct phone number"))
         }
         axios.post(domain+`/inside/app/sms/send/${values.phoneNumber}`, {
             phoneNumber: values.phoneNumber
         })
         .then((response) => {
-            message.success('短信已发送')
+            message.success(i18next.t('SMS sent'))
             countDown()
         })
         .catch(function (error) {
             console.log('error', error.response);
             if(error.response.status == '400'){
                 if(error.response.data?.errorInfo == 'phone number illegal'){
-                    message.error('请输入正确的手机号！')
+                    message.error(i18next.t("Please enter the correct phone number"))
                 }else if(error.response.data?.errorInfo == 'Please wait a moment while trying to send.'){
-                    message.error('你的操作过于频繁，请稍后再试！')
+                    message.error(i18next.t('Your operation is too frequent'))
                 }else if(error.response.data?.errorInfo.includes('exceed the limit')){
-                    message.error('获取已达上限！')
+                    message.error('Get times have reached the maximum')
                 }else{
                     message.error(error.response.data?.errorInfo)
                 }

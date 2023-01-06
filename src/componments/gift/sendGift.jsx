@@ -210,7 +210,7 @@ const SenfGifts = ({ open, onClose, selectGift }) => {
                             className={classes.giftImg} />
                     </Box>
                     <Box className={classes.giftInfo}>
-                        <Typography className={classes.giftNameStyle}>{gift_name}</Typography>
+                        <Typography className={classes.giftNameStyle}>{i18next.t(gift_name)}</Typography>
                         <Box className={classes.giftPriceBox}>
                             <img
                                 className={classes.priceImg}

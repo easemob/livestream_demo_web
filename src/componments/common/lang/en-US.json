@@ -5,7 +5,7 @@
         "Setting": "Setting",
         "Cancel": "Cancel",
         "Okay": "Okay",
-        "No Reasult for": "No Reasult for",
+        "No Result for": "No Result for",
         "Gifts": "Gifts",
         "Send": "Send",
         "All": "All",
@@ -33,6 +33,21 @@
         "Mobile Number": "Mobile Number",
         "Login": "Login",
         "Login Easemob Live Stream": "Login Easemob Live Stream",
-        "Get Code": "Get Code"
+        "Get Code": "Get Code",
+        "Please enter the correct phone number": "Please enter the correct phone number",
+        "SMS sent": "SMS sent",
+        "Your operation is too frequent": "Your operation is too frequent, please try again later!",
+        "Get times have reached the maximum": "Get times have reached the maximum!",
+        "Search Channel": "Search Channel",
+        "Search Members": "Search Members",
+        "Subtotal": "Subtotal",
+        "PinkHeart": "PinkHeart",
+        "PlasticFlower": "PlasticFlower",
+        "ThePushBox": "ThePushBox",
+        "BigAce": "BigAce",
+        "Star": "Star",
+        "Lollipop": "Lollipop",
+        "Diamond": "Diamond",
+        "Crown": "Crown"
     }
 }

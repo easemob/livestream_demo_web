@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player'
 import WebIM from '../../utils/WebIM'
 import store from '../../redux/store'
 import { clearGiftMsgAction } from '../../redux/actions'
-
+import i18next from "i18next";
 import defaultAvatar from '../../assets/images/defaultAvatar.png'
 import defaultVideo from '../../assets/images/defaultVideo.png'
 
@@ -140,7 +140,7 @@ const VideoPlayer = () => {
                             <Avatar src={roomMemberInfo[giftSender]?.avatarurl || defaultAvatar} className={classes.avatarStyle}></Avatar>
                             <Box className={classes.userBox}>
                                 <Typography className={classes.giftUserStyle}>{roomMemberInfo[giftSender]?.nickname || giftSender}</Typography>
-                                <Typography className={classes.giftNameStyle}>{`sent ${gift_name}`}</Typography>
+                                <Typography className={classes.giftNameStyle}>{`${i18next.t('Send')} ${i18next.t(gift_name)}`}</Typography>
                             </Box>
                             <img
                                 className={classes.giftImg}

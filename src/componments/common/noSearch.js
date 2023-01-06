@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => {
 const NoSearch = ({value}) => {
     const classes = useStyles();
     return <Box className={classes.root}>
-        <Typography className={classes.textStyle}>{i18next.t(`No Reasult for ${value || "IM"}`)}</Typography>
+        <Typography className={classes.textStyle}>{`${i18next.t("No Result for")} ${value || "IM"}`}</Typography>
     </Box>
 }
 
