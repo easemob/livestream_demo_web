@@ -4,15 +4,15 @@ import { message } from "../componments/common/alert";
 import WebIM from '../utils/WebIM'
 const domain = window.location.protocol + '//a1.easemob.com';
 export const getToken = (phoneNumber, smsCode) => {
-    return axios.post(domain + '/inside/app/user/login/V1?appkey=easemob-demo%23chatdemoui', {
+    return axios.post(domain + '/inside/app/user/login/V2?appkey=easemob-demo%23chatdemoui', {
         phoneNumber: phoneNumber,
         smsCode: smsCode
     })
         .then(function (response) {
             console.log(response);
-            const { token } = response.data
+            const { token, chatUserName } = response.data
             message.success('登录成功')
-            loginByToken(phoneNumber, token)
+            loginByToken(chatUserName, token)
             return true
         })
         .catch(function (error) {
